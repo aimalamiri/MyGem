@@ -9,6 +9,12 @@ class ScheduledClass extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'class_type_id',
+        'instructor_id',
+        'date_time',
+    ];
+
     public function instructor()
     {
         return $this->belongsTo(User::class);
