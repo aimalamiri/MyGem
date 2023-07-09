@@ -13,6 +13,9 @@ class ScheduledClassController extends Controller
      */
     public function index()
     {
+        $scheduledClasses = auth()->user()->scheduledClasses()->where('date_time', '>', now())->oldest('date_time')->get();
+
+        return view('instructor.upcoming', compact('scheduledClasses'));
     }
 
     /**
@@ -42,13 +45,23 @@ class ScheduledClassController extends Controller
         ]);
 
         $scheduledClass = ScheduledClass::create($validated);
+
+        return redirect()->route('schedule.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        $scheduledClass = ScheduledClass::findOrFail($id);
+
+        if (auth()->user()->id !== $scheduledClass->instructor_id) {
+            abort(403);
+        }
+
+        $scheduledClass->delete();
+
+        return redirect()->route('schedule.index');
     }
 }

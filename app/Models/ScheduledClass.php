@@ -15,6 +15,10 @@ class ScheduledClass extends Model
         'date_time',
     ];
 
+    protected $casts = [
+        'date_time' => 'datetime',
+    ];
+
     public function instructor()
     {
         return $this->belongsTo(User::class);
