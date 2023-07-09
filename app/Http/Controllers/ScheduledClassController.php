@@ -56,7 +56,7 @@ class ScheduledClassController extends Controller
     {
         $scheduledClass = ScheduledClass::findOrFail($id);
 
-        if (auth()->user()->id !== $scheduledClass->instructor_id) {
+        if (auth()->user()->cannot('delete', $scheduledClass)) {
             abort(403);
         }
 
