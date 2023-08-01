@@ -23,6 +23,15 @@
                             Upcoming Classes
                         </x-nav-link>
                     @endcan
+
+                    @can('book-class')
+                        <x-nav-link :href="route('bookings.create')" :active="request()->routeIs('bookings.create')">
+                            Book a class
+                        </x-nav-link>
+                        <x-nav-link :href="route('bookings.index')" :active="request()->routeIs('bookings.index')">
+                            Upcoming classes
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
