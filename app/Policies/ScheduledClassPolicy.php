@@ -9,6 +9,6 @@ class ScheduledClassPolicy
 {
     public function delete(User $user, ScheduledClass $scheduledClass): bool
     {
-        return $user->user_id === $scheduledClass->instructor_id;
+        return $user->id === $scheduledClass->instructor_id;
     }
 }
